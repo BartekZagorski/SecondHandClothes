@@ -11,26 +11,34 @@ import java.util.Date;
 @Entity
 @Table(name = "products")
 @Data
-class Product {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
 
+    @Column(name="name")
     private String name;
 
+    @Column(name="description")
     private String description;
 
+    @Column(name="unit_price")
     private BigDecimal unitPrice;
 
+    @Column(name="image_url")
     private String imageUrl;
 
+    @Column(name="active")
     private boolean active;
 
     @CreationTimestamp
+    @Column(name="date_created")
     private Date dateCreated;
 
     @UpdateTimestamp
+    @Column(name="date_updated")
     private Date lastUpdated;
 
     @ManyToOne
