@@ -10,7 +10,7 @@ import java.util.Set;
 @Table(name = "super_categories")
 @Getter
 @Setter
-class SuperCategory {
+public class SuperCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
