@@ -23,4 +23,8 @@ public class ProductCategory {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private Set<Product> products;
+
+    @ManyToOne
+    @JoinColumn(name = "super_category_id", nullable = false)
+    private SuperCategory superCategory;
 }
