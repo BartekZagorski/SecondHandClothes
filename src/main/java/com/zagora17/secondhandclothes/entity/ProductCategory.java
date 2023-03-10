@@ -27,4 +27,13 @@ public class ProductCategory {
     @ManyToOne
     @JoinColumn(name = "super_category_id", nullable = false)
     private SuperCategory superCategory;
+
+    @Transient
+    private Long superCategoryID;
+
+    @PostLoad
+    public void setSuperCategoryID() {
+        this.superCategoryID = superCategory.getId();
+    }
+
 }
