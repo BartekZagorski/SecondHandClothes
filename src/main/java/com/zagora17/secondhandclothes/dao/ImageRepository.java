@@ -8,5 +8,5 @@ import java.awt.*;
 
 @RepositoryRestResource(collectionResourceRel = "images", path = "images")
 @CrossOrigin("http://localhost:4200")
-public interface ImageRepository extends JpaRepository<Image, Long> {
+public interface ImageRepository extends JpaRepository<com.zagora17.secondhandclothes.entity.Image, Long> {
 }
