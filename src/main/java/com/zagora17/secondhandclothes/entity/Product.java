@@ -7,7 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -47,6 +47,6 @@ public class Product {
     private ProductCategory category;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
-    private Set<Image> images;
+    private List<Image> images;
 
 }
