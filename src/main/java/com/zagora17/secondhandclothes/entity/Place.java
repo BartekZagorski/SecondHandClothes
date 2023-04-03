@@ -18,5 +18,7 @@ public class Place {
     @Column(name = "name")
     private String name;
 
-
+    @ManyToOne
+    @JoinColumn(name = "province_id", nullable = false)
+    private Province province;
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "provinces")
 @Getter
@@ -17,4 +19,7 @@ public class Province {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "province")
+    private Set<Place> places;
 }
