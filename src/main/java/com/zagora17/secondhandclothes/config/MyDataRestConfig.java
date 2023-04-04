@@ -1,7 +1,6 @@
 package com.zagora17.secondhandclothes.config;
 
-import com.zagora17.secondhandclothes.entity.Product;
-import com.zagora17.secondhandclothes.entity.ProductCategory;
+import com.zagora17.secondhandclothes.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +32,9 @@ class MyDataRestConfig implements RepositoryRestConfigurer {
         //disable following http methods: POST, PUT, DELETE, PATCH
         disableHttpMethods(Product.class, config, unsupportedActions);
         disableHttpMethods(ProductCategory.class, config, unsupportedActions);
+        disableHttpMethods(SuperCategory.class, config, unsupportedActions);
+        disableHttpMethods(Province.class, config, unsupportedActions);
+        disableHttpMethods(Place.class, config, unsupportedActions);
 
 
         // run exposeIds to make Ids available in the JSON response directly and simply
