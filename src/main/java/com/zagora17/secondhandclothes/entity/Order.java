@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "orders")
 @Data
-class Order {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
