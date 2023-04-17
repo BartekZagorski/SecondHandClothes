@@ -3,6 +3,7 @@ package com.zagora17.secondhandclothes.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,4 +27,14 @@ public class Customer {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private Set<Order> orders;
+
+    public void addOrder(Order order) {
+        if (order != null) {
+            if(orders == null) {
+                orders = new HashSet<>();
+            }
+            order.setCustomer(this);
+            orders.add(order);
+        }
+    }
 }
