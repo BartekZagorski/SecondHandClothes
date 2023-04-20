@@ -2,10 +2,13 @@ package com.zagora17.secondhandclothes.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Table(name = "address")
-@Data
+@Table(name = "addresses")
+@Getter
+@Setter
 public class Address {
 
     @Id
