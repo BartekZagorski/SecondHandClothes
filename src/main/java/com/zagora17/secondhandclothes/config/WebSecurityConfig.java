@@ -20,10 +20,13 @@ class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
+        http.cors().and()
+                .csrf().disable()
+                .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET, "/api/products/search/findByNameContaining/**").hasAuthority(USER)
                 .requestMatchers(HttpMethod.GET, "/api/products/search/findByNameContaining/**").hasAnyRole(ADMIN, USER)
                 .requestMatchers(HttpMethod.GET).permitAll()
+                .requestMatchers(HttpMethod.POST).permitAll()
                 .anyRequest().authenticated();
         http.oauth2ResourceServer()
                 .jwt()
