@@ -4,6 +4,7 @@ import com.zagora17.secondhandclothes.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -18,6 +19,8 @@ import java.util.Set;
 class MyDataRestConfig implements RepositoryRestConfigurer {
 
     private final EntityManager entityManager;
+    @Value("${allowed.origins}")
+    private String[] theAllowedOrigins;
 
     @Autowired
     public MyDataRestConfig(EntityManager entityManager) {
@@ -41,7 +44,7 @@ class MyDataRestConfig implements RepositoryRestConfigurer {
         this.exposeIds(config);
 
         //configure cors mapping
-        cors.addMapping(config.getBasePath() + "/**").allowedOrigins("http://localhost:4200");
+        cors.addMapping(config.getBasePath() + "/**").allowedOrigins(theAllowedOrigins);
     }
 
     private <T> void disableHttpMethods(Class<T> theClass, RepositoryRestConfiguration config, HttpMethod[] unsupportedActions) {
