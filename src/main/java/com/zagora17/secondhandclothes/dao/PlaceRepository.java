@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import java.util.Set;
 
 @RepositoryRestResource(collectionResourceRel = "places", path = "places")
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://localhost:4200")
 public interface PlaceRepository extends JpaRepository<Place, Integer> {
     Set<Place> findByProvinceIdOrderByNameAsc(@Param("id") Integer id);
 }
