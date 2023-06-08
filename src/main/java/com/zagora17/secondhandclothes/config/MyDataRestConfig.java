@@ -39,6 +39,9 @@ class MyDataRestConfig implements RepositoryRestConfigurer {
 
         // run exposeIds to make Ids available in the JSON response directly and simply
         this.exposeIds(config);
+
+        //configure cors mapping
+        cors.addMapping(config.getBasePath() + "/**").allowedOrigins("http://localhost:4200");
     }
 
     private <T> void disableHttpMethods(Class<T> theClass, RepositoryRestConfiguration config, HttpMethod[] unsupportedActions) {
