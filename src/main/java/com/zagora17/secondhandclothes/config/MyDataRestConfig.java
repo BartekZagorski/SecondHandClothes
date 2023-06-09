@@ -38,7 +38,7 @@ class MyDataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(SuperCategory.class, config, unsupportedActions);
         disableHttpMethods(Province.class, config, unsupportedActions);
         disableHttpMethods(Place.class, config, unsupportedActions);
-
+        disableHttpMethods(Order.class, config, unsupportedActions);
 
         // run exposeIds to make Ids available in the JSON response directly and simply
         this.exposeIds(config);
