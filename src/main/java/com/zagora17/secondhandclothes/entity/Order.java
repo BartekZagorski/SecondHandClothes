@@ -32,6 +32,9 @@ public class Order {
     @Column(name = "total_quantity")
     private Integer totalQuantity;
 
+    @Column(name = "shipping_cost")
+    private BigDecimal shippingCost;
+
     @Column(name = "status")
     private String status;
 
