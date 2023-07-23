@@ -48,6 +48,15 @@ public class ImageService {
 
         return "file uploaded successfully : " + filePath;
     }
+    @Transactional
+    public String uploadMultipleImagesToFileSystem(List<MultipartFile> files, Long productId) throws IOException {
+        StringBuilder messageBuilder = new StringBuilder();
+        for (MultipartFile file: files
+             ) {
+            messageBuilder.append(this.uploadImageToFileSystem(file, productId));
+        }
+        return messageBuilder.toString();
+    }
 
     public byte[] downloadImageFromFileSystem(Long id) throws IOException {
         Optional<Image> fileData = imageRepository.findById(id);

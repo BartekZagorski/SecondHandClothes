@@ -17,12 +17,19 @@ class ImageController {
 
     @Autowired
     private ImageService imageService;
-    @PostMapping
+
     public ResponseEntity<String> uploadImageToFileSystem(@RequestParam("image") MultipartFile file,
                                                           @RequestParam("productId") Long productId) throws IOException {
         String uploadImage = imageService.uploadImageToFileSystem(file, productId);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(uploadImage);
+    }
+
+    @PostMapping
+    public ResponseEntity<String> uploadMultipleImages(@RequestParam("images") List<MultipartFile> files,
+                                                       @RequestParam("productId") Long productId) throws IOException {
+        String message = imageService.uploadMultipleImagesToFileSystem(files, productId);
+        return ResponseEntity.status(HttpStatus.OK).body(message);
     }
 
     @GetMapping("/{id}")
