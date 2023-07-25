@@ -1,5 +1,6 @@
 package com.zagora17.secondhandclothes.controller;
 
+import com.zagora17.secondhandclothes.dto.ImageDTO;
 import com.zagora17.secondhandclothes.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,7 +41,15 @@ class ImageController {
     }
 
     @GetMapping
-    public ResponseEntity<List<String>> getResourceUrl(@RequestParam Long productId) {
+    public ResponseEntity<List<ImageDTO>> getResourceUrl(@RequestParam Long productId) {
         return ResponseEntity.ok(this.imageService.getImages(productId));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteImage(@PathVariable Long id) {
+
+        this.imageService.deleteImage(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
