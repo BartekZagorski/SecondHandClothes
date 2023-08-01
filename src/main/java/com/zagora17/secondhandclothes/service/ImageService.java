@@ -105,7 +105,7 @@ public class ImageService {
     }
     
     
-
+    @Transactional
     public void deleteImage (Long id) {
         Optional<Image> fileData = imageRepository.findById(id);
 
