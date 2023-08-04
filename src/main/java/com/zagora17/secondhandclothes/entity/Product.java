@@ -1,12 +1,15 @@
 package com.zagora17.secondhandclothes.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 @Entity
@@ -42,11 +45,22 @@ public class Product {
     @Column(name="date_updated")
     private Date lastUpdated;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private ProductCategory category;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private List<Image> images;
+
+    public void addImage(Image image) {
+        if (image != null) {
+            if ( images == null) {
+                images = new ArrayList<>();
+            }
+            images.add(image);
+            image.setProduct(this);
+        }
+    }
 
 }

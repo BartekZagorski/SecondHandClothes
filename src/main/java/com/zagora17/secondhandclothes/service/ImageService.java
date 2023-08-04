@@ -39,17 +39,22 @@ public class ImageService {
     private ProductRepository productRepository;
     @Transactional
     public String uploadImageToFileSystem(MultipartFile file, Long productId) throws IOException {
-        String filePath=FOLDER_PATH+"assets/"+file.getOriginalFilename();
                 imageRepository.save(Image.builder()
                         .product(productRepository.findById(productId).get())
                         .url("assets/"+file.getOriginalFilename()).build());
 
-
-        Path path = Paths.get(filePath).toAbsolutePath();
-        file.transferTo(path.toFile());
+                var filePath = createFile(file);
 
         return "file uploaded successfully : " + filePath;
     }
+
+    public String createFile(MultipartFile file) throws IOException {
+        String filePath=FOLDER_PATH+"assets/"+ file.getOriginalFilename();
+        Path path = Paths.get(filePath).toAbsolutePath();
+        file.transferTo(path.toFile());
+        return filePath;
+    }
+
     @Transactional
     public String uploadMultipleImagesToFileSystem(List<MultipartFile> files, Long productId) throws IOException {
         StringBuilder messageBuilder = new StringBuilder();

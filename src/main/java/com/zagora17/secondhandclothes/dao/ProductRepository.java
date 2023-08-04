@@ -1,6 +1,7 @@
 package com.zagora17.secondhandclothes.dao;
 
 import com.zagora17.secondhandclothes.entity.Product;
+import com.zagora17.secondhandclothes.entity.ProductCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,4 +18,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findByNameContaining(@Param("name") String name, Pageable pageable);
 
     Page<Product> findByCategorySuperCategoryId(@Param("id") Long id, Pageable pageable);
+
 }
