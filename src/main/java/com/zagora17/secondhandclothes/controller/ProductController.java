@@ -7,6 +7,7 @@ import com.zagora17.secondhandclothes.entity.Product;
 import com.zagora17.secondhandclothes.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,8 +23,7 @@ class ProductController {
     private ProductService productService;
 
     @PostMapping
-    ResponseEntity<Product> placeProduct(@RequestPart("images") List<MultipartFile> images,
-                                         @RequestPart ProductDTO product) {
-        return ResponseEntity.ok(this.productService.placeProduct(images, product));
+    ResponseEntity<Product> placeProduct(@RequestBody ProductDTO product) {
+        return ResponseEntity.ok(this.productService.placeProduct(product));
     }
 }

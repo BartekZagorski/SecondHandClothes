@@ -31,40 +31,20 @@ public class ProductService {
         this.imageService = imageService;
     }
     @Transactional
-    public Product placeProduct(List<MultipartFile> files, ProductDTO productDTO) {
+    public Product placeProduct(ProductDTO productDTO) {
 
         Product product = new Product();
 
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
         product.setUnitPrice((productDTO.getUnitPrice()));
-        product.setImageUrl(productDTO.getImageUrl());
+        product.setImageUrl((productDTO.getImageUrl()));
 
         String categoryName = productDTO.getCategory();
         System.out.println(categoryName);
         ProductCategory category = this.categoryRepository.findByName(categoryName);
 
         product.setCategory(category);
-
-        if (files != null) {
-
-        var images = files.stream().map(file-> {
-            try {
-                this.imageService.createFile(file);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            var image = Image.builder()
-                            .product(product)
-                            .url("assets/"+file.getOriginalFilename())
-                            .build();
-            System.out.println(image);
-            return image;
-        }).toList();
-
-        product.setImages(images);
-        product.setImageUrl(images.get(0).getUrl());
-        }
 
         this.repository.save(product);
 

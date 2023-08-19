@@ -1,11 +1,10 @@
 package com.zagora17.secondhandclothes.dto;
 
 import com.zagora17.secondhandclothes.entity.Image;
-import com.zagora17.secondhandclothes.entity.ProductCategory;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 @Data
 public class ProductDTO {
@@ -14,5 +13,5 @@ public class ProductDTO {
     private BigDecimal unitPrice;
     private String imageUrl;
     private String category;
-    private Set<Image> images;
+    private List<Image> images;
 }
