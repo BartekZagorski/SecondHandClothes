@@ -23,7 +23,14 @@ class ProductController {
     private ProductService productService;
 
     @PostMapping
-    ResponseEntity<Product> placeProduct(@RequestBody ProductDTO product) {
-        return ResponseEntity.ok(this.productService.placeProduct(product));
+    ResponseEntity<Product> placeProduct(@RequestPart ProductDTO product, @RequestParam List<MultipartFile> images ) {
+        return ResponseEntity.ok(this.productService.placeProduct(product, images));
+    }
+
+    @PostMapping(value = "/test", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    ResponseEntity<?> placeProductTest(@RequestPart ProductDTO product, @RequestParam List<MultipartFile> images) {
+        System.out.println(product);
+        System.out.println(images);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }

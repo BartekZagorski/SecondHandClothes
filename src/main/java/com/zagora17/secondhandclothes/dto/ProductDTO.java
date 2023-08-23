@@ -13,5 +13,4 @@ public class ProductDTO {
     private BigDecimal unitPrice;
     private String imageUrl;
     private String category;
-    private List<Image> images;
 }
