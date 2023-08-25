@@ -68,4 +68,14 @@ public class ProductService {
 
         return product;
     }
+
+    @Transactional
+    public void deleteProduct(Long id) {
+        this.repository.findById(id).ifPresent(product->{
+            for(Image image : product.getImages()) {
+                this.imageService.deleteImageFile(image);
+            }
+            this.repository.deleteById(id);
+        });
+    }
 }

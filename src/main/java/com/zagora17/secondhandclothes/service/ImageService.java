@@ -114,14 +114,18 @@ public class ImageService {
     public void deleteImage (Long id) {
         Optional<Image> fileData = imageRepository.findById(id);
 
-        var filePath = FOLDER_PATH + fileData.get().getUrl();
+        deleteImageFile(fileData.get());
+
+        this.imageRepository.deleteById(id);
+    }
+
+    public void deleteImageFile(Image image) {
+        var filePath = FOLDER_PATH + image.getUrl();
 
         try {
             Files.deleteIfExists(Paths.get(filePath));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        this.imageRepository.deleteById(id);
     }
 }

@@ -27,6 +27,7 @@ class WebSecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/api/images/**").hasAuthority(ADMIN)
                 .requestMatchers(HttpMethod.POST, "/api/images/**").hasAuthority((ADMIN))
                 .requestMatchers(HttpMethod.POST, "/api/products").hasAuthority(ADMIN)
+                .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasAuthority(ADMIN)
                 .requestMatchers(HttpMethod.GET).permitAll()
                 .anyRequest().authenticated();
         http.oauth2ResourceServer()

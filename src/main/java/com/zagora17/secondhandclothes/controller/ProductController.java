@@ -27,10 +27,10 @@ class ProductController {
         return ResponseEntity.ok(this.productService.placeProduct(product, images));
     }
 
-    @PostMapping(value = "/test", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    ResponseEntity<?> placeProductTest(@RequestPart ProductDTO product, @RequestParam List<MultipartFile> images) {
-        System.out.println(product);
-        System.out.println(images);
-        return ResponseEntity.ok(HttpStatus.OK);
+    @DeleteMapping
+    ResponseEntity<?> deleteProduct(@RequestParam String id) {
+        this.productService.deleteProduct(Long.valueOf(id));
+        return ResponseEntity.accepted().build();
     }
+
 }
