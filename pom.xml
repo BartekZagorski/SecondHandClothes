@@ -10,11 +10,12 @@
 	</parent>
 	<groupId>com.zagora17</groupId>
 	<artifactId>second-hand-clothes</artifactId>
+	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>second-hand-clothes</name>
 	<description>My shop with second hand clothes</description>
 	<properties>
-		<java.version>19</java.version>
+		<java.version>17</java.version>
 		<keycloak.version>21.1.1</keycloak.version>
 	</properties>
 	<dependencies>

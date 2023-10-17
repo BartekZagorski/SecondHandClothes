@@ -24,6 +24,7 @@ class WebSecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET, "/api/orders/**").hasAuthority(USER)
+                .requestMatchers(HttpMethod.GET, "/api/cart-details/**").hasAuthority(USER)
                 .requestMatchers(HttpMethod.DELETE, "/api/images/**").hasAuthority(ADMIN)
                 .requestMatchers(HttpMethod.POST, "/api/images/**").hasAuthority((ADMIN))
                 .requestMatchers(HttpMethod.POST, "/api/products").hasAuthority(ADMIN)

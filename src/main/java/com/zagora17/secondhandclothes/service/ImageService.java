@@ -5,6 +5,7 @@ import com.zagora17.secondhandclothes.dao.ProductRepository;
 import com.zagora17.secondhandclothes.dto.ImageDTO;
 import com.zagora17.secondhandclothes.entity.Image;
 import jakarta.transaction.Transactional;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -24,8 +25,8 @@ import java.util.Optional;
 
 @Service
 public class ImageService {
-    private final String FOLDER_PATH="/work/second-hand-clothes-app/second-hand-clothes-frontend/second-hand-clothes" +
-            "/src/";
+    @Value("${fileserver.url}")
+    private String FOLDER_PATH;
     @Autowired
     private ImageRepository imageRepository;
 
@@ -38,18 +39,24 @@ public class ImageService {
     @Autowired
     private ProductRepository productRepository;
     @Transactional
-    public String uploadImageToFileSystem(MultipartFile file, Long productId) throws IOException {
-                imageRepository.save(Image.builder()
-                        .product(productRepository.findById(productId).get())
-                        .url("assets/"+file.getOriginalFilename()).build());
+    public String uploadImageToFileSystem(MultipartFile file, Long productId){
 
-                var filePath = createFile(file);
+                return productRepository.findById(productId).map(product -> {
+                    try {
+                        var filePath = createFile(file);
+                        imageRepository.save(Image.builder()
+                                .product(product)
+                                .url("assets/"+file.getOriginalFilename()).build());
+                        return "file uploaded successfully : " + filePath;
+                    } catch (IOException e) {
+                        return "something went wrong";
+                    }
+                }).orElse("something went wrong");
 
-        return "file uploaded successfully : " + filePath;
     }
 
     public String createFile(MultipartFile file) throws IOException {
-        String filePath=FOLDER_PATH+"assets/"+ file.getOriginalFilename();
+        String filePath= FOLDER_PATH +"assets/"+ file.getOriginalFilename();
         Path path = Paths.get(filePath).toAbsolutePath();
         file.transferTo(path.toFile());
         return filePath;
@@ -68,7 +75,7 @@ public class ImageService {
     public byte[] downloadImageFromFileSystem(Long id) throws IOException {
         Optional<Image> fileData = imageRepository.findById(id);
 
-        var filePath = FOLDER_PATH + fileData.get().getUrl();
+        var filePath = fileData.map(image -> FOLDER_PATH + image.getUrl()).orElse("");
 
         try {
             return Files.readAllBytes(new File(filePath).toPath());
@@ -94,7 +101,7 @@ public class ImageService {
     }
 
     private static String buildURL(Long id, String ip, String port) {
-        return "http://" + ip + ":" + port + "/api/images/" + id;
+        return "https://localhost:" + port + "/api/images/" + id;
     }
 
     private String getPort() {
