@@ -12,4 +12,6 @@ import java.util.Set;
 //@CrossOrigin("http://localhost:4200")
 public interface PlaceRepository extends JpaRepository<Place, Integer> {
     Set<Place> findByProvinceIdOrderByNameAsc(@Param("id") Integer id);
+
+    Set<Place> findByProvinceIdAndNameStartingWithOrderByNameAsc(@Param("id") Integer id, @Param("name") String name);
 }
