@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(value = {"http://localhost:4200", "https://secondhand.bartlomiejzagorski.pl"})
 @RestController
 @RequestMapping("/api/images")
 class ImageController {

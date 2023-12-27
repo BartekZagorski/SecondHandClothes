@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.net.URI;
 import java.util.List;
 
-@CrossOrigin("https://localhost:4200")
+@CrossOrigin(value = {"http://localhost:4200", "https://secondhand.bartlomiejzagorski.pl"})
 @RestController
 @RequestMapping("/api/products")
 class ProductController {

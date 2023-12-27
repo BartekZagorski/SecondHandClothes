@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(value = {"http://localhost:4200", "https://secondhand.bartlomiejzagorski.pl"})
 @RestController
 @RequestMapping("/api/checkout")
 class CheckoutController {
